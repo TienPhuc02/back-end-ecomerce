@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "dev": "set NODE_ENV=DEVELOPMENT && nodemon app.js",
-    "prod": "set NODE_ENV=PRODUCTION && nodemon app.js"
+    "prod": "set NODE_ENV=PRODUCTION && nodemon app.js",
+    "seeder": "node seeder/seeder.js"
   },
   "author": "Tien Phuc",
   "license": "ISC",
