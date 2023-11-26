@@ -30,7 +30,16 @@ const productSchema = new mongoose.Schema(
       required: [true, "PLease Enter Your Product category"],
       enum: {
         values: [
-          "Electronics,Cameras,Laptops,Accessories,HeadPhones,Food,Books,Sports,Outdoor,Home",
+          "Electronics",
+          "Cameras",
+          "Laptops",
+          "Accessories",
+          "HeadPhones",
+          "Food",
+          "Books",
+          "Sports",
+          "Outdoor",
+          "Home",
         ],
         message: "Please Select correct activity",
       },
@@ -67,7 +76,7 @@ const productSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false,
     },
   },
   { timestamps: true }
