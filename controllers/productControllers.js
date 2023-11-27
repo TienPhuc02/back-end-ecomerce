@@ -20,15 +20,36 @@ export const createNewProducts = async (req, res) => {
 
 //get product details -> /api/v1/products/:id
 export const getProductsDetail = async (req, res) => {
-  console.log(req.params)
+  console.log(req.params);
   const getProductDetails = await product.findById(req?.params?.id);
-  if(!getProductDetails){
+  if (!getProductDetails) {
     res.status(404).json({
-      message:" Product not found"
-    })
+      message: " Product not found",
+    });
   }
   res.status(200).json({
     message: "Get  Products Details Success",
     getProductDetails,
+  });
+};
+
+//update product details -> /api/v1/products/:id
+export const updateProductsDetail = async (req, res) => {
+  console.log(req.params);
+  const getProductDetails = await product.findById(req?.params?.id);
+  if (!getProductDetails) {
+    res.status(404).json({
+      message: " Product not found",
+    });
+  }
+
+  const newProductUpdate = await product.findByIdAndUpdate(
+    req?.params?.id,
+    req.body,
+    { new: true }
+  );
+  res.status(200).json({
+    message: "Get  Products Details Success",
+    newProductUpdate,
   });
 };
