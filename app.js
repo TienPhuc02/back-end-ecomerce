@@ -2,6 +2,7 @@ import express from "express";
 import productRoutes from "./routes/products.js";
 import dotenv from "dotenv";
 import { connectDatabase } from "./config/DBconnect.js";
+import errorMiddleware from "./middlewares/error.js";
 const app = express();
 dotenv.config({ path: "./config/config.env" });
 
@@ -12,6 +13,10 @@ app.use(express.json());
 
 //import all routes
 app.use("/api/v1", productRoutes);
+
+// using error middleware
+app.use(errorMiddleware); // phải để ở dưới này
+
 
 app.listen(process.env.PORT, () => {
   console.log(
