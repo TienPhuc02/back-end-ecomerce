@@ -4,6 +4,12 @@ import dotenv from "dotenv";
 import { connectDatabase } from "./config/DBconnect.js";
 import errorMiddleware from "./middlewares/error.js";
 const app = express();
+
+process.on("uncaughtException", (err) => {
+  console.log(`ERROR: ${err}`);
+  console.log("shutting down  server due to  uncaught expection");
+  process.exit(1);
+});
 dotenv.config({ path: "./config/config.env" });
 
 //connecting data base
