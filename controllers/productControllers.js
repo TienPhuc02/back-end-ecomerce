@@ -1,13 +1,18 @@
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import product from "../models/product.js";
+import { APIFilter } from "../utils/apiFilter.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
 //get all product -> /api/v1/products
 export const getAllProducts = catchAsyncErrors(async (req, res) => {
-  const allProducts = await product.find();
+  const apiFilter = new APIFilter(product, req.query).search();
+  let products = await apiFilter.query;
+  let filteredProductCount = products.length;
+  // const allProducts = await product.find();
   res.status(200).json({
     message: "Get All Products Success",
-    allProducts,
+    filteredProductCount,
+    products,
   });
 });
 
@@ -22,7 +27,7 @@ export const createNewProducts = catchAsyncErrors(async (req, res) => {
 
 //get product details -> /api/v1/products/:id
 export const getProductsDetail = catchAsyncErrors(async (req, res, next) => {
-  console.log(req.params);
+
   const getProductDetails = await product.findById(req?.params?.id);
   if (!getProductDetails) {
     return next(new ErrorHandler("Product not found", 404));
@@ -35,7 +40,7 @@ export const getProductsDetail = catchAsyncErrors(async (req, res, next) => {
 
 //update product details -> /api/v1/products/:id
 export const updateProductsDetail = catchAsyncErrors(async (req, res) => {
-  console.log(req.params);
+
   const getProductDetails = await product.findById(req?.params?.id);
   if (!getProductDetails) {
     return next(new ErrorHandler("Product not found", 404));
@@ -54,7 +59,7 @@ export const updateProductsDetail = catchAsyncErrors(async (req, res) => {
 
 //delete product details -> /api/v1/products/:id
 export const deleteProductsDetail = catchAsyncErrors(async (req, res) => {
-  console.log(req.params);
+
   const getProductDetails = await product.findById(req?.params?.id);
   if (!getProductDetails) {
     return next(new ErrorHandler("Product not found", 404));
