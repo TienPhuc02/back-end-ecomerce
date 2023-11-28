@@ -5,10 +5,11 @@ import ErrorHandler from "../utils/errorHandler.js";
 
 //get all product -> /api/v1/products
 export const getAllProducts = catchAsyncErrors(async (req, res) => {
-  const apiFilter = new APIFilter(product, req.query).search();
+  const apiFilter = new APIFilter(product, req.query).search().filter();
+
   let products = await apiFilter.query;
+
   let filteredProductCount = products.length;
-  // const allProducts = await product.find();
   res.status(200).json({
     message: "Get All Products Success",
     filteredProductCount,
@@ -27,7 +28,6 @@ export const createNewProducts = catchAsyncErrors(async (req, res) => {
 
 //get product details -> /api/v1/products/:id
 export const getProductsDetail = catchAsyncErrors(async (req, res, next) => {
-
   const getProductDetails = await product.findById(req?.params?.id);
   if (!getProductDetails) {
     return next(new ErrorHandler("Product not found", 404));
@@ -40,7 +40,6 @@ export const getProductsDetail = catchAsyncErrors(async (req, res, next) => {
 
 //update product details -> /api/v1/products/:id
 export const updateProductsDetail = catchAsyncErrors(async (req, res) => {
-
   const getProductDetails = await product.findById(req?.params?.id);
   if (!getProductDetails) {
     return next(new ErrorHandler("Product not found", 404));
@@ -59,7 +58,6 @@ export const updateProductsDetail = catchAsyncErrors(async (req, res) => {
 
 //delete product details -> /api/v1/products/:id
 export const deleteProductsDetail = catchAsyncErrors(async (req, res) => {
-
   const getProductDetails = await product.findById(req?.params?.id);
   if (!getProductDetails) {
     return next(new ErrorHandler("Product not found", 404));
