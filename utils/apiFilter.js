@@ -21,7 +21,7 @@ export class APIFilter {
   filter() {
     const queryCopy = { ...this.queryStr };
     //field to remove
-    const fieldsToRemove = ["keyword", "page"];
+    const fieldsToRemove = ["keyword", "currentPage", "pageSize"];
     fieldsToRemove.forEach((el) => delete queryCopy[el]);
 
     //filter advance  for price,ratings,etc
@@ -31,10 +31,11 @@ export class APIFilter {
     this.query = this.query.find(JSON.parse(queryStr));
     return this;
   }
-  pagination(resPerPage) {
-    const currentPage = Number(this.queryStr.page) || 1;
-    const skip = resPerPage * (currentPage - 1);
-    this.query = this.query.limit(resPerPage).skip(skip);
+  pagination() {
+    const pageSize = Number(this.queryStr.pageSize) || 4;
+    const currentPage = Number(this.queryStr.currentPage) || 1;
+    const skip = pageSize * (currentPage - 1);
+    this.query = this.query.limit(pageSize).skip(skip);
     return this;
   }
 }
