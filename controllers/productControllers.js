@@ -5,11 +5,12 @@ import ErrorHandler from "../utils/errorHandler.js";
 
 //get all product -> /api/v1/products
 export const getAllProducts = catchAsyncErrors(async (req, res) => {
-  const apiFilter = new APIFilter(product, req.query).search().filter();
-
-  let products = await apiFilter.query;
-
+  const apiFilters = new APIFilter(product, req.query).search().filter();
+  const resPerPage = 4;
+  let products = await apiFilters.query;
   let filteredProductCount = products.length;
+  apiFilters.pagination(resPerPage);
+  products = await apiFilters.query.clone();
   res.status(200).json({
     message: "Get All Products Success",
     filteredProductCount,
