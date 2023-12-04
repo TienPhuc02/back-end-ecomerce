@@ -1,5 +1,6 @@
 import express from "express";
 import productRoutes from "./routes/products.js";
+import authRoutes from "./routes/auth.js";
 import dotenv from "dotenv";
 import { connectDatabase } from "./config/DBconnect.js";
 import errorMiddleware from "./middlewares/error.js";
@@ -19,6 +20,7 @@ app.use(express.json());
 
 //import all routes
 app.use("/api/v1", productRoutes);
+app.use("/api/v1", authRoutes);
 
 // using error middleware
 app.use(errorMiddleware); // phải để ở dưới này
