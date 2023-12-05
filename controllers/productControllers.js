@@ -6,7 +6,10 @@ import ErrorHandler from "../utils/errorHandler.js";
 //get all product -> /api/v1/products
 export const getAllProducts = catchAsyncErrors(async (req, res) => {
   const apiFilters = new APIFilter(product, req.query).search().filter();
-  // const resPerPage = 4;
+  console.log(
+    "🚀 ~ file: productControllers.js:8 ~ getAllProducts ~ req:",
+    req?.user
+  );
   let products = await apiFilters.query;
   let filteredProductCount = products.length;
   apiFilters.pagination();
