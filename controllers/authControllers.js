@@ -109,7 +109,6 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
   }
   //set new password
   user.password = req.body.password;
-
   user.resetPasswordExpire = undefined;
   user.resetPasswordToken = undefined;
   await user.save();
