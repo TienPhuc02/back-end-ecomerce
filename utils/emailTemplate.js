@@ -532,7 +532,7 @@ export const getResetPasswordTemplate = (user, resetUrl) => `
                                 browser.
                               </p>
                               <p class="f-fallback sub">
-                                <a href="${resetUrl}">{resetUrl}</a>
+                                <a href="${resetUrl}">${resetUrl}</a>
                               </p>
                             </td>
                           </tr>
