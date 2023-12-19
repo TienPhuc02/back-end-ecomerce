@@ -5,6 +5,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 import sendEmail from "../utils/sendEmail.js";
 import sendToken from "../utils/sendToken.js";
 import crypto from "crypto";
+
 // register user => api/v1/register
 export const registerUser = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -31,7 +32,15 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
   // check if password is correct
 
   const isPasswordMatched = await user.comparePassword(password);
+  console.log(
+    "🚀 ~ file: authControllers.js:35 ~ loginUser ~ isPasswordMatched:",
+    isPasswordMatched
+  );
   if (!isPasswordMatched) {
+    console.log(
+      "🚀 ~ file: authControllers.js:36 ~ loginUser ~ isPasswordMatched:",
+      isPasswordMatched
+    );
     return next(new ErrorHandler("Invalid Email or Password", 401));
   }
   sendToken(user, 200, res);
@@ -121,5 +130,34 @@ export const getUserProfile = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req?.user?._id);
   res.status(200).json({
     user,
+  });
+});
+
+//update password -> /api/v1/password/update
+
+export const updatePassword = catchAsyncErrors(async (req, res, next) => {
+  console.log(
+    "🚀 ~ file: authControllers.js:139 ~ updatePassword ~ req:",
+    req.body
+  );
+  const user = await User.findById(req?.user?._id).select("+password");
+  console.log(
+    "🚀 ~ file: authControllers.js:140 ~ updatePassword ~ user:",
+    user
+  );
+
+  //check previous user password
+  const isPasswordMatched = await user.comparePassword(req?.body?.oldPassword);
+  console.log(
+    "🚀 ~ file: authControllers.js:135 ~ updatePassword ~ isPasswordMatched:",
+    isPasswordMatched
+  );
+  if (!isPasswordMatched) {
+    return next(new ErrorHandler("old password is incorrect", 400));
+  }
+  user.password = req?.body?.password;
+  user.save();
+  res.status(200).json({
+    success: true,
   });
 });
