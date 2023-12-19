@@ -1,5 +1,5 @@
 //Create token and save in the cookie
-export default (user, statusCode, res) => {
+export default (user, statusCode, res,mes) => {
   //create JWT token
   const token = user.getJwtToken();
 
@@ -11,6 +11,7 @@ export default (user, statusCode, res) => {
     httpOnly: true,
   };
   res.status(statusCode).cookie("token", token, options).json({
+    message:mes,
     token,
   });
 };

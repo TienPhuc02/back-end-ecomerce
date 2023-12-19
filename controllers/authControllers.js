@@ -43,7 +43,7 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
     );
     return next(new ErrorHandler("Invalid Email or Password", 401));
   }
-  sendToken(user, 200, res);
+  sendToken(user, 200, res, "login user success");
 });
 
 // login user => api/v1/logout
@@ -89,7 +89,7 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
     await user.save();
     return next(new ErrorHandler(error?.message), 500);
   }
-  sendToken(user, 200, res);
+  sendToken(user, 200, res, " Get Forgot User With Token Success");
 });
 
 //forgot password -> api/v1/password/reset/:token
@@ -121,7 +121,7 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
   user.resetPasswordExpire = undefined;
   user.resetPasswordToken = undefined;
   await user.save();
-  sendToken(user, 200, res);
+  sendToken(user, 200, res, "Get  Reset Password With Token Success");
 });
 
 //get current user profile -> /api/v1/me
@@ -129,6 +129,7 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
 export const getUserProfile = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req?.user?._id);
   res.status(200).json({
+    message: "Get  Update Profile Success",
     user,
   });
 });
@@ -158,6 +159,7 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
   user.password = req?.body?.password;
   user.save();
   res.status(200).json({
+    message: "Get  Update password Success",
     success: true,
   });
 });
@@ -180,8 +182,7 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
     user
   );
   res.status(200).json({
+    message: "Get  Update Profile Success",
     user,
   });
 });
-
-
