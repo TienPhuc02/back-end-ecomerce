@@ -161,3 +161,25 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
     success: true,
   });
 });
+
+// update profile -> /api/v1/me/update
+export const updateProfile = catchAsyncErrors(async (req, res, next) => {
+  console.log(
+    "🚀 ~ file: authControllers.js:139 ~ updatePassword ~ req:",
+    req.body
+  );
+  const newUserData = {
+    email: req.body.email,
+    name: req.body.name,
+  };
+  const user = await User.findByIdAndUpdate(req?.user?._id, newUserData, {
+    new: true,
+  });
+  console.log(
+    "🚀 ~ file: authControllers.js:140 ~ updatePassword ~ user:",
+    user
+  );
+  res.status(200).json({
+    user,
+  });
+});
