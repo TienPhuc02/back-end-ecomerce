@@ -99,3 +99,15 @@ export const updateOrder = catchAsyncErrors(async (req, res, next) => {
     success: true,
   });
 });
+
+//delete order -ADMIN   -> api/v1/admin/orders
+export const deleteOrder = catchAsyncErrors(async (req, res, next) => {
+  const order = await Order.deleteOne(req.param.id);
+  if (!order) {
+    return next(new ErrorHandler("No order found with this ID", 404));
+  }
+  res.status(200).json({
+    message: "Delete Order Detail Success",
+    success: true,
+  });
+});

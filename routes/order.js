@@ -3,6 +3,7 @@ import express from "express";
 import { authorizeRoles, isAuthenticated } from "../middlewares/auth.js";
 import {
   createNewOrder,
+  deleteOrder,
   getAllOrders,
   getMyOrders,
   getOrderDetail,
@@ -18,4 +19,7 @@ router
 router
   .route("/admin/orders/:id")
   .put(isAuthenticated, authorizeRoles("admin"), updateOrder);
+router
+  .route("/admin/orders/:id")
+  .delete(isAuthenticated, authorizeRoles("admin"), deleteOrder);
 export default router;
