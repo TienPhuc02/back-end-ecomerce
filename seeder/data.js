@@ -134,7 +134,7 @@ export default [
     images: [
       {
         public_id: "shopit/demo/xmndneguqtrcutpf9wcz",
-        url: "http://res.cloudinary.com/udemy-courses/image/upload/v1698577572/shopit/demo/xmndneguqtrcutpf9wcz.jpg",
+        url: "http://res.cloudinary.com/udemy-courses/image/upload/v1698577557/shopit/demo/kxckb0o7fbdwqgmugoct.jpg",
       },
     ],
     category: "Accessories",

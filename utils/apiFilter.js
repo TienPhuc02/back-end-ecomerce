@@ -32,8 +32,8 @@ export class APIFilter {
     return this;
   }
   pagination() {
-    const pageSize = Number(this.queryStr.pageSize) || 4;
-    const currentPage = Number(this.queryStr.currentPage) || 1;
+    const pageSize = Number(this.queryStr.pageSize);
+    const currentPage = Number(this.queryStr.currentPage);
     const skip = pageSize * (currentPage - 1);
     this.query = this.query.limit(pageSize).skip(skip);
     return this;
