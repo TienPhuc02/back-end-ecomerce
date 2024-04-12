@@ -125,24 +125,7 @@ export default [
     numOfReviews: 2671,
     reviews: [],
   },
-  {
-    name: "Cable Boom Microphone - Volume Control for Playstation PS4 or Xbox",
-    price: 27.99,
-    description:
-      "DESIGN INFO - 3.5mm male to 2.5mm male audio cable adapter with Upgraded Flexible, Detachable Boom Mic which also enables rotary Volume Control and Mute Switch. SteelFlex Arm for perfect microphone positioning. INPUT COMPATIBILITY - Devices supporting 3.5mm audio output such as gaming PS4 / Xbox One controller, PC, Laptop, iPhone and Android Phone.",
-    ratings: 4.1,
-    images: [
-      {
-        public_id: "shopit/demo/xmndneguqtrcutpf9wcz",
-        url: "http://res.cloudinary.com/udemy-courses/image/upload/v1698577557/shopit/demo/kxckb0o7fbdwqgmugoct.jpg",
-      },
-    ],
-    category: "Accessories",
-    seller: "Amazon",
-    stock: 1123,
-    numOfReviews: 6,
-    reviews: [],
-  },
+  
   {
     name: "Nikon D3500 W/ AF-P DX NIKKOR 18-55mm f/3.5-5.6G VR Black",
     price: 496.95,

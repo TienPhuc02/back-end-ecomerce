@@ -111,3 +111,22 @@ export const deleteOrder = catchAsyncErrors(async (req, res, next) => {
     success: true,
   });
 });
+// Get Sales Data  =>  /api/v1/admin/get_sales
+export const getSales = catchAsyncErrors(async (req, res, next) => {
+  const startDate = new Date(req.query.startDate);
+  const endDate = new Date(req.query.endDate);
+
+  startDate.setUTCHours(0, 0, 0, 0);
+  endDate.setUTCHours(23, 59, 59, 999);
+
+  const { salesData, totalSales, totalNumOrders } = await getSalesData(
+    startDate,
+    endDate
+  );
+
+  res.status(200).json({
+    totalSales,
+    totalNumOrders,
+    sales: salesData,
+  });
+});

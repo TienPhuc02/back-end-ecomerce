@@ -1,5 +1,6 @@
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import User from "../models/user.js";
+import { upload_file } from "../utils/cloudinary.js";
 import { getResetPasswordTemplate } from "../utils/emailTemplate.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import sendEmail from "../utils/sendEmail.js";
@@ -9,14 +10,38 @@ import crypto from "crypto";
 // register user => api/v1/register
 export const registerUser = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password } = req.body;
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return res.status(400).json({
+      success: false,
+      message: "Email is already taken. Please choose a different one.",
+    });
+  }
   const newUser = await User.create({
     name,
     email,
     password,
+    avatar: {
+      public_id: "",
+      url: "",
+    },
   });
-  sendToken(newUser, 201, res);
+  sendToken(newUser, 201, res, "Register User Success");
 });
 
+// API endpoint to get user information after reloading
+export const getLoggedInUser = catchAsyncErrors(async (req, res, next) => {
+  res.status(200).json({
+    success: true,
+    user: {
+      _id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+      role: req.user.role,
+      avatar: req.user.avatar,
+    },
+  });
+});
 // login user => api/v1/login
 export const loginUser = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
@@ -54,6 +79,18 @@ export const logOutUser = catchAsyncErrors(async (req, res, next) => {
   });
   res.status(200).json({
     message: "Logged Out",
+  });
+});
+
+// upload  user avater => api/v1/me/upload_avatar
+export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
+  const avatarResponse = await upload_file(req.body.avatar, "shopit/avatars");
+  const user = await User.findByIdAndUpdate(req?.user?._id, {
+    avatar: avatarResponse,
+  });
+
+  res.status(200).json({
+    user,
   });
 });
 

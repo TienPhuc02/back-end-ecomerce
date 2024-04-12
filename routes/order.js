@@ -7,6 +7,7 @@ import {
   getAllOrders,
   getMyOrders,
   getOrderDetail,
+  getSales,
   updateOrder,
 } from "../controllers/orderController.js";
 const router = express.Router();
@@ -16,6 +17,9 @@ router.route("/me/orders").get(isAuthenticated, getMyOrders);
 router
   .route("/admin/orders")
   .get(isAuthenticated, authorizeRoles("admin"), getAllOrders);
+  router
+  .route("/admin/get_sales")
+  .get(isAuthenticated, authorizeRoles("admin"), getSales);
 router
   .route("/admin/orders/:id")
   .put(isAuthenticated, authorizeRoles("admin"), updateOrder);

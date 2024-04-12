@@ -28,6 +28,7 @@ export class APIFilter {
 
     let queryStr = JSON.stringify(queryCopy);
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (match) => `$${match}`);
+    // "gt" (lớn hơn), "gte" (lớn hơn hoặc bằng), "lt" (nhỏ hơn), và "lte" (nhỏ hơn hoặc bằng).
     this.query = this.query.find(JSON.parse(queryStr));
     return this;
   }

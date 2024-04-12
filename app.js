@@ -26,7 +26,13 @@ app.use(express.json());
 app.use(cookieParser());
 
 // use cors middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
 
 //import all routes
 app.use("/api/v1", productRoutes);
@@ -37,13 +43,6 @@ app.use("/api/v1", orderRoutes);
 // using error middleware
 app.use(errorMiddleware); // phải để ở dưới này
 
-// app.use(function (req, res, next) {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-//   next();
-// });
 const server = app.listen(process.env.PORT, () => {
   console.log(
     `Server started on PORT :${process.env.PORT} in ${process.env.NODE_ENV} mode.`
