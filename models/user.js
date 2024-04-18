@@ -11,7 +11,15 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: [true, "Please Enter Your Email"],
+      trim: true,
+      lowercase: true,
+      unique: true,
+      required: "Email address is required",
+      validate: [validateEmail, "Please fill a valid email address"],
+      match: [
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        "Please fill a valid email address",
+      ],
     },
     password: {
       type: String,
@@ -50,7 +58,7 @@ userSchema.methods.getJwtToken = function () {
 };
 //compare user password
 userSchema.methods.comparePassword = async function (enteredPassword) {
-  console.log("🚀 ~ file: user.js:53 ~ enteredPassword:", enteredPassword)
+  console.log("🚀 ~ file: user.js:53 ~ enteredPassword:", enteredPassword);
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
@@ -69,7 +77,5 @@ userSchema.methods.getResetPasswordToken = function () {
   this.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
   return resetToken;
 };
-
-
 
 export default mongoose.model("User", userSchema);
