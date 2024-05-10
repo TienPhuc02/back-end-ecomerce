@@ -6,7 +6,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 import sendEmail from "../utils/sendEmail.js";
 import sendToken from "../utils/sendToken.js";
 import crypto from "crypto";
-
+import cloudinary from "cloudinary";
 // register user => api/v1/register
 export const registerUser = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -38,7 +38,10 @@ export const getLoggedInUser = catchAsyncErrors(async (req, res, next) => {
       name: req.user.name,
       email: req.user.email,
       role: req.user.role,
-      avatar: req.user.avatar,
+      avatar: {
+        public_id: req.user.avatar.public_id,
+        url: req.user.avatar.url,
+      },
     },
   });
 });
@@ -83,15 +86,31 @@ export const logOutUser = catchAsyncErrors(async (req, res, next) => {
 });
 
 // upload  user avater => api/v1/me/upload_avatar
-export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
-  const avatarResponse = await upload_file(req.body.avatar, "shopit/avatars");
-  const user = await User.findByIdAndUpdate(req?.user?._id, {
-    avatar: avatarResponse,
-  });
 
-  res.status(200).json({
-    user,
-  });
+
+export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
+  const folder = "SHOPIT/avatars";
+  cloudinary.v2.uploader.upload(
+    req.file.path,
+    { folder: folder },
+    async function (err, result) {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Error",
+        });
+      }
+      const user = await User.findByIdAndUpdate(req?.user?._id, {
+        avatar: { public_id: result.public_id, url: result.url },
+      });
+      res.status(200).json({
+        success: true,
+        message: "Uploaded",
+        data: result,
+      });
+    }
+  );
 });
 
 // forget user => api/v1/password/forgot
@@ -165,6 +184,7 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 export const getUserProfile = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req?.user?._id);
+  console.log(user);
   res.status(200).json({
     message: "Get  Update Profile Success",
     user,

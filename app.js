@@ -15,12 +15,13 @@ process.on("uncaughtException", (err) => {
   console.log("shutting down  server due to  uncaught expection");
   process.exit(1);
 });
-dotenv.config({ path: "./config/config.env" });
+dotenv.config();
 
 //connecting data base
 connectDatabase();
 
 app.use(express.json());
+
 
 //cookie-parser
 app.use(cookieParser());
