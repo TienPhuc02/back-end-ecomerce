@@ -4,6 +4,7 @@ import productRoutes from "./routes/products.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
 import orderRoutes from "./routes/order.js";
+import paymentRoutes from "./routes/payment.js";
 import dotenv from "dotenv";
 import { connectDatabase } from "./config/DBconnect.js";
 import errorMiddleware from "./middlewares/error.js";
@@ -22,7 +23,6 @@ connectDatabase();
 
 app.use(express.json());
 
-
 //cookie-parser
 app.use(cookieParser());
 
@@ -40,6 +40,7 @@ app.use("/api/v1", productRoutes);
 app.use("/api/v1", authRoutes);
 app.use("/api/v1", userRoutes);
 app.use("/api/v1", orderRoutes);
+app.use("/api/v1", paymentRoutes);
 
 // using error middleware
 app.use(errorMiddleware); // phải để ở dưới này

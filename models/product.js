@@ -3,17 +3,17 @@ const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "PLease Enter Your Product name"],
+      // required: [true, "PLease Enter Your Product name"],
       maxLength: [200, "Product name exceed to 200 characters"],
     },
     price: {
       type: Number,
-      required: [true, "Plesase Enter Your Product price"],
+      // required: [true, "Plesase Enter Your Product price"],
       maxLength: [5, "Product price exceed to 5 digits "],
     },
     description: {
       type: String,
-      required: [true, "PLease Enter Your Product description"],
+      // required: [true, "PLease Enter Your Product description"],
     },
     ratings: {
       type: Number,
@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema(
     ],
     category: {
       type: String,
-      required: [true, "Please Enter Your Product category"],
+      // required: [true, "Please Enter Your Product category"],
       enum: {
         values: [
           "Electronics",
@@ -46,11 +46,11 @@ const productSchema = new mongoose.Schema(
     },
     seller: {
       type: String,
-      required: [true, "PLease Enter Your Product seller"],
+      // required: [true, "PLease Enter Your Product seller"],
     },
     stock: {
       type: Number,
-      required: [true, "PLease Enter Your Product stock"],
+      // required: [true, "PLease Enter Your Product stock"],
     },
     numOfReview: {
       type: Number,
@@ -76,7 +76,7 @@ const productSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      // required: true,
     },
   },
   { timestamps: true }

@@ -20,7 +20,7 @@ export const stripeCheckoutSession = catchAsyncErrors(
           },
           unit_amount: item?.price * 100,
         },
-        tax_rates: ["txr_1LlBSDA7jBHqn8SB8z4waAin"],
+        tax_rates: ["txr_1PKAbrGAY3OnCt5BOj4PvfMK"],
         quantity: item?.quantity,
       };
     });
@@ -29,12 +29,12 @@ export const stripeCheckoutSession = catchAsyncErrors(
 
     const shipping_rate =
       body?.itemsPrice >= 200
-        ? "shr_1P4kvmGAY3OnCt5BOyk9x1Ph"
-        : "shr_1P4kwXGAY3OnCt5BooAs3U32";
+        ? "shr_1PKAeIGAY3OnCt5BTpHwiVJW"
+        : "shr_1PKAdyGAY3OnCt5BfGaCX1lB";
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      success_url: `${process.env.FRONTEND_URL}/me/orders?order_success=true`,
+      success_url: `${process.env.FRONTEND_URL}/me/orders`,
       cancel_url: `${process.env.FRONTEND_URL}`,
       customer_email: req?.user?.email,
       client_reference_id: req?.user?._id?.toString(),
@@ -48,8 +48,10 @@ export const stripeCheckoutSession = catchAsyncErrors(
       line_items,
     });
 
+    // console.log(session);
     res.status(200).json({
       url: session.url,
+      sessionId: session.id,
     });
   }
 );
@@ -62,6 +64,7 @@ const getOrderItems = async (line_items) => {
       const product = await stripe.products.retrieve(item.price.product);
       const productId = product.metadata.productId;
 
+      console.log("product", product);
       cartItems.push({
         product: productId,
         name: product.name,

@@ -87,7 +87,6 @@ export const logOutUser = catchAsyncErrors(async (req, res, next) => {
 
 // upload  user avater => api/v1/me/upload_avatar
 
-
 export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
   const folder = "SHOPIT/avatars";
   cloudinary.v2.uploader.upload(
@@ -128,8 +127,8 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   //create reset password url
   const resetUrl = `${process.env.FRONTEND_URL}/api/password/reset/${resetToken}`;
-
-  const message = getResetPasswordTemplate(user?.name, resetUrl);
+  console.log(">> check user name", user.name);
+  const message = getResetPasswordTemplate(user.name, resetUrl);
   try {
     await sendEmail({
       email: user.email,

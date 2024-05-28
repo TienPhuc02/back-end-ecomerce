@@ -125,7 +125,7 @@ export default [
     numOfReviews: 2671,
     reviews: [],
   },
-  
+
   {
     name: "Nikon D3500 W/ AF-P DX NIKKOR 18-55mm f/3.5-5.6G VR Black",
     price: 496.95,
@@ -180,7 +180,7 @@ export default [
   },
   {
     name: "Kauffman Orchards Homegrown McIntosh Apples",
-    price: 2.75,
+    price: 1,
     description:
       "McIntosh is a pretty red/green apple with white flesh Homegrown in Kauffman's orchard in healthy Lancaster County soil McIntosh apples are famous for snacking, pies, salads, and applesauce Protected with soft, high-density foam for safe shipping to your door Not for sale to California, Oregon, or Washington due to state laws governing fresh produce",
     ratings: 5,

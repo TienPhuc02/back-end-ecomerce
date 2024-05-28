@@ -1,11 +1,11 @@
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import product from "../models/product.js";
-import { APIFilter } from "../utils/apiFilter.js";
+import APIFilters from "../utils/apiFilter.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
 //get all product -> /api/v1/products
 export const getAllProducts = catchAsyncErrors(async (req, res, next) => {
-  const apiFilters = new APIFilter(product, req.query)?.search()?.filter();
+  const apiFilters = new APIFilters(product, req.query)?.search()?.filters();
   console.log(
     "🚀 ~ file: productControllers.js:8 ~ getAllProducts ~ req:",
     req?.user

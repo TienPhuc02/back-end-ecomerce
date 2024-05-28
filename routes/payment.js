@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import { isAuthenticatedUser } from "../middlewares/auth.js";
+import { isAuthenticated } from "../middlewares/auth.js";
 import {
   stripeCheckoutSession,
   stripeWebhook,
@@ -9,7 +9,8 @@ import {
 
 router
   .route("/payment/checkout_session")
-  .post(isAuthenticatedUser, stripeCheckoutSession);
+  .post(isAuthenticated, stripeCheckoutSession);
 
 router.route("/payment/webhook").post(stripeWebhook);
+
 export default router;

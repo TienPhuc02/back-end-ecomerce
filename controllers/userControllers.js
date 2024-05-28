@@ -1,12 +1,31 @@
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import user from "../models/user.js";
+import APIFilters from "../utils/apiFilter.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
 //get all user -> /api/v1/admin/users
 export const getAllUser = catchAsyncErrors(async (req, res, next) => {
-  const users = await user.find().search().filter();
+  const queryStr = { ...req.query };
+  const { name, email } = req.query;
+
+  if (name) {
+    queryStr.keyword = name;
+    delete queryStr.name;
+  } else if (email) {
+    queryStr.keyword = email;
+    delete queryStr.email;
+  }
+
+  const apiFilters = new APIFilters(user, queryStr)?.search()?.filters();
+
+  let users = await apiFilters.query;
+  let filteredProductCount = users.length;
+  apiFilters.pagination();
+  users = await apiFilters.query.clone();
+
   res.status(200).json({
-    message: "Get All  User Details Success",
+    message: "Get All Products Success",
+    filteredProductCount,
     users,
   });
 });
@@ -41,7 +60,7 @@ export const updateUsersDetail = catchAsyncErrors(async (req, res) => {
     name: req.body.name,
     role: req.body.role,
   };
-//   console.log("🚀 ~ file: userControllers.js:44 ~ updateUsersDetail ~ newUserData:", newUserData)
+  //   console.log("🚀 ~ file: userControllers.js:44 ~ updateUsersDetail ~ newUserData:", newUserData)
 
   const newUserUpdate = await user.findByIdAndUpdate(
     req?.params?.id,

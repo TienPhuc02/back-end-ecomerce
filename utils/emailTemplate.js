@@ -474,7 +474,7 @@ export const getResetPasswordTemplate = (user, resetUrl) => `
                   <tr>
                     <td class="content-cell">
                       <div class="f-fallback">
-                        <h1>Hi ${user?.name},</h1>
+                        <h1>Hi ${user},</h1>
                         <p>
                           You recently requested to reset your password for your
                           ShopIT account. Use the button below to reset it.
