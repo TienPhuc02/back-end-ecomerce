@@ -90,7 +90,8 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
     );
-
+    console.log("event", event);
+    console.log("event type ", event.type);
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
 
@@ -109,7 +110,7 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
       const shippingInfo = {
         address: session.metadata.address,
         city: session.metadata.city,
-        phoneNo: session.metadata.phoneNo,
+        phoneNumber: session.metadata.phoneNumber,
         zipCode: session.metadata.zipCode,
         country: session.metadata.country,
       };
@@ -130,7 +131,7 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
         paymentMethod: "Card",
         user,
       };
-
+      console.log(orderData);
       await Order.create(orderData);
 
       res.status(200).json({ success: true });

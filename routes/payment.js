@@ -6,6 +6,7 @@ import {
   stripeCheckoutSession,
   stripeWebhook,
 } from "../controllers/paymentControllers.js";
+import bodyParser from "body-parser";
 
 router
   .route("/payment/checkout_session")

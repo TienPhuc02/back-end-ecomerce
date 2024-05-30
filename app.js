@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 import { connectDatabase } from "./config/DBconnect.js";
 import errorMiddleware from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 const app = express();
 
 process.on("uncaughtException", (err) => {
@@ -21,8 +22,15 @@ dotenv.config();
 //connecting data base
 connectDatabase();
 
-app.use(express.json());
 
+app.use(
+  express.json({
+    limit: "10mb",
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString();
+    },
+  })
+);
 //cookie-parser
 app.use(cookieParser());
 
