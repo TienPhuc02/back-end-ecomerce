@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import product from "../models/product.js";
-import Products from "../seeder/data.js";
+import { Products } from "./data.js";
+// import order from "../models/order.js";
+
 const seedProducts = async () => {
   try {
     await mongoose.connect(

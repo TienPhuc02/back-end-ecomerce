@@ -1,4 +1,4 @@
-export default [
+export const Products = [
   {
     name: "SanDisk Ultra 128GB SDXC UHS-I Memory Card up to 80MB/s",
     price: 45.89,
@@ -198,6 +198,376 @@ export default [
     seller: "Kauffman's Fruit Farm & Market",
     stock: 500,
     numOfReviews: 1,
+    reviews: [],
+  },
+  {
+    name: "Samsung Galaxy S21 Ultra 5G",
+    price: 1199.99,
+    description:
+      "The Samsung Galaxy S21 Ultra 5G comes with a 6.8-inch Dynamic AMOLED display, Exynos 2100 processor, 12GB RAM, and a 5000mAh battery. It features a quad-camera setup with a 108MP main sensor and 100x Space Zoom. The device is 5G ready and offers a sleek design with premium materials.",
+    ratings: 4.6,
+    images: [
+      {
+        public_id: "shopit/demo/samsung_s21_ultra_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717420709/SHOPIT/images_product/nxfq0hrtve1qs9ebjkq1.jpg",
+      },
+      {
+        public_id: "shopit/demo/samsung_s21_ultra_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717485607/SHOPIT/images_product/t5ed83n4ee3udiuxla3g.jpg",
+      },
+      {
+        public_id: "shopit/demo/samsung_s21_ultra_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488882/SHOPIT/images_product/mkxmqy6o7rtrmouwczk9.jpg",
+      },
+      {
+        public_id: "shopit/demo/samsung_s21_ultra_4",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488892/SHOPIT/images_product/nacdp3yjzse24yrx3drt.jpg",
+      },
+    ],
+    category: "Electronics",
+    seller: "Samsung",
+    stock: 25,
+    numOfReview: 340,
+    reviews: [],
+  },
+  {
+    name: "Fitbit Charge 5 Advanced Health & Fitness Tracker",
+    price: 179.95,
+    description:
+      "Fitbit Charge 5 offers advanced health and fitness tracking features, including built-in GPS, 24/7 heart rate monitoring, stress management, and sleep tracking. With a vibrant color touchscreen, it also provides smartphone notifications, making it the ultimate fitness companion.",
+    ratings: 4.2,
+    images: [
+      {
+        public_id: "shopit/demo/fitbit_charge_5_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487737/SHOPIT/images_product/qwzfww2hrm1xsd8gyr4m.jpg",
+      },
+      {
+        public_id: "shopit/demo/fitbit_charge_5_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487747/SHOPIT/images_product/q8k4ma2lkjzqay8swzrv.jpg",
+      },
+      {
+        public_id: "shopit/demo/fitbit_charge_5_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487761/SHOPIT/images_product/ssl8q5luasksgjlqzkda.jpg",
+      },
+      {
+        public_id: "shopit/demo/fitbit_charge_5_4",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487770/SHOPIT/images_product/hkhy4lqhupbgdlcq6h0a.jpg",
+      },
+      {
+        public_id: "shopit/demo/fitbit_charge_5_5",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487789/SHOPIT/images_product/fwpi4dxsjiczjmsglqjc.jpg",
+      },
+    ],
+    category: "Accessories",
+    seller: "Fitbit",
+    stock: 60,
+    numOfReview: 210,
+    reviews: [],
+  },
+  {
+    name: "GoPro HERO9 Black",
+    price: 399.99,
+    description:
+      "The GoPro HERO9 Black features a new front display, 5K video recording, and HyperSmooth 3.0 stabilization. It's waterproof up to 33ft, making it perfect for capturing adventures both in and out of the water. With enhanced battery life and numerous mounting options, the HERO9 is a versatile action camera.",
+    ratings: 4.8,
+    images: [
+      {
+        public_id: "shopit/demo/gopro_hero9_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487864/SHOPIT/images_product/w7bpruwmlflqcejzf9sj.jpg",
+      },
+      {
+        public_id: "shopit/demo/gopro_hero9_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487873/SHOPIT/images_product/itkmt4w2mwbh9otzdq51.jpg",
+      },
+      {
+        public_id: "shopit/demo/gopro_hero9_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487881/SHOPIT/images_product/e5j1dgpkam2graoniuwa.jpg",
+      },
+      {
+        public_id: "shopit/demo/gopro_hero9_4",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487889/SHOPIT/images_product/gpqyeuibgaxqmhflgetk.jpg",
+      },
+    ],
+    category: "Cameras",
+    seller: "GoPro",
+    stock: 45,
+    numOfReview: 150,
+    reviews: [],
+  },
+  {
+    name: "Dell XPS 13 (9310), 13.4-inch FHD+ Touch Laptop",
+    price: 1249.99,
+    description:
+      "The Dell XPS 13 (9310) features a 13.4-inch FHD+ touch display, 11th Gen Intel Core i7 processor, 16GB RAM, and a 512GB SSD. It's designed for performance and portability with a sleek, lightweight build and advanced cooling technology.",
+    ratings: 4.7,
+    images: [
+      {
+        public_id: "shopit/demo/dell_xps_13_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487956/SHOPIT/images_product/xupahmcnehvbe843dom0.jpg",
+      },
+      {
+        public_id: "shopit/demo/dell_xps_13_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487964/SHOPIT/images_product/wldxnclgiyqrtpiitvcf.jpg",
+      },
+      {
+        public_id: "shopit/demo/dell_xps_13_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487970/SHOPIT/images_product/ouwrsxapjx9oy3igwue2.jpg",
+      },
+      {
+        public_id: "shopit/demo/dell_xps_13_4",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717487978/SHOPIT/images_product/n9b2phld7rooz6xeizn5.jpg",
+      },
+    ],
+    category: "Laptops",
+    seller: "Dell",
+    stock: 30,
+    numOfReview: 80,
+    reviews: [],
+  },
+  {
+    name: "Sony WH-1000XM4 Wireless Noise-Canceling Headphones",
+    price: 348,
+    description:
+      "Sony's WH-1000XM4 headphones offer industry-leading noise cancellation, up to 30 hours of battery life, and touch sensor controls. They feature Adaptive Sound Control, speak-to-chat technology, and high-quality sound for an immersive listening experience.",
+    ratings: 4.9,
+    images: [
+      {
+        public_id: "shopit/demo/sony_wh1000xm4_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488084/SHOPIT/images_product/czy7cztijzjcicx0zqrw.jpg",
+      },
+      {
+        public_id: "shopit/demo/sony_wh1000xm4_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488092/SHOPIT/images_product/d22qvyqgv6my2pblkhat.jpg",
+      },
+      {
+        public_id: "shopit/demo/sony_wh1000xm4_4",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488102/SHOPIT/images_product/wvkbgyjewwpgpg5rtpzq.jpg",
+      },
+    ],
+    category: "Headphones",
+    seller: "Sony",
+    stock: 50,
+    numOfReview: 450,
+    reviews: [],
+  },
+  {
+    name: "Microsoft Surface Pro 7",
+    price: 749.99,
+    description:
+      "The Microsoft Surface Pro 7 is a versatile 2-in-1 device that combines the power of a laptop with the flexibility of a tablet. It features a 12.3-inch PixelSense display, Intel Core i5 processor, 8GB RAM, and a 128GB SSD. The Surface Pro 7 also supports the Surface Pen for enhanced productivity.",
+    ratings: 4.3,
+    images: [
+      {
+        public_id: "shopit/demo/surface_pro7_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488152/SHOPIT/images_product/vgphc67c1b4z0ugszrbi.jpg",
+      },
+      {
+        public_id: "shopit/demo/surface_pro7_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488160/SHOPIT/images_product/awbztrb7bjqizoan4kfq.jpg",
+      },
+      {
+        public_id: "shopit/demo/surface_pro7_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488169/SHOPIT/images_product/eymtjhi0jukizlobgzi3.jpg",
+      },
+    ],
+    category: "Laptops",
+    seller: "Microsoft",
+    stock: 40,
+    numOfReview: 180,
+    reviews: [],
+  },
+  {
+    name: "Logitech MX Master 3 Advanced Wireless Mouse",
+    price: 99.99,
+    description:
+      "The Logitech MX Master 3 is designed for precision and comfort. It features a MagSpeed scroll wheel, customizable buttons, and advanced tracking on any surface. With USB-C quick charging, it offers up to 70 days of battery life on a full charge.",
+    ratings: 4.8,
+    images: [
+      {
+        public_id: "shopit/demo/logitech_mx_master3_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488218/SHOPIT/images_product/fmxqycuemvjhdnmbeifb.jpg",
+      },
+      {
+        public_id: "shopit/demo/logitech_mx_master3_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488228/SHOPIT/images_product/ffggnnv3efh6ci9ehd6s.jpg",
+      },
+      {
+        public_id: "shopit/demo/logitech_mx_master3_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488236/SHOPIT/images_product/gflpewjoy8gbu1rdagpa.jpg",
+      },
+    ],
+    category: "Accessories",
+    seller: "Logitech",
+    stock: 70,
+    numOfReview: 320,
+    reviews: [],
+  },
+  {
+    name: "ASUS ROG Strix G15 Gaming Laptop",
+    price: 1099.99,
+    description:
+      "The ASUS ROG Strix G15 is a powerful gaming laptop featuring a 15.6-inch FHD display with a 144Hz refresh rate, AMD Ryzen 7 processor, 16GB RAM, and a 512GB SSD. It includes an NVIDIA GeForce GTX 1660 Ti GPU for smooth and immersive gaming experiences.",
+    ratings: 4.5,
+    images: [
+      {
+        public_id: "shopit/demo/asus_rog_strix_g15_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488324/SHOPIT/images_product/l8wtjpivueuycm5snbn2.jpg",
+      },
+      {
+        public_id: "shopit/demo/asus_rog_strix_g15_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488333/SHOPIT/images_product/iixwpwov6hyvutwz8dgb.jpg",
+      },
+      {
+        public_id: "shopit/demo/asus_rog_strix_g15_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488340/SHOPIT/images_product/e5unvarw8ew4iikcltsx.jpg",
+      },
+    ],
+    category: "Laptops",
+    seller: "ASUS",
+    stock: 35,
+    numOfReview: 90,
+    reviews: [],
+  },
+  {
+    name: "Canon EOS R5 Full-Frame Mirrorless Camera",
+    price: 3899,
+    description:
+      "The Canon EOS R5 is a professional-grade mirrorless camera featuring a 45MP full-frame sensor, 8K video recording, and advanced image stabilization. It offers high-speed performance, weather-sealed construction, and compatibility with a wide range of RF and EF lenses.",
+    ratings: 4.9,
+    images: [
+      {
+        public_id: "shopit/demo/canon_eos_r5_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488403/SHOPIT/images_product/ngmnnlfdfx9pnxp6lhlu.jpg",
+      },
+      {
+        public_id: "shopit/demo/canon_eos_r5_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488410/SHOPIT/images_product/ytws6faxwiou8rsodyhr.jpg",
+      },
+      {
+        public_id: "shopit/demo/canon_eos_r5_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488419/SHOPIT/images_product/lk0hxrvrnnqmiccc0lgn.jpg",
+      },
+      {
+        public_id: "shopit/demo/canon_eos_r5_4",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488426/SHOPIT/images_product/ysdbdful5qmfhfo2twqe.jpg",
+      },
+    ],
+    category: "Cameras",
+    seller: "Canon",
+    stock: 20,
+    numOfReview: 150,
+    reviews: [],
+  },
+  {
+    name: "Anker PowerCore 10000 Portable Charger",
+    price: 24.99,
+    description:
+      "The Anker PowerCore 10000 is a compact and powerful portable charger with a 10000mAh capacity. It provides multiple charges for your devices, features high-speed PowerIQ and VoltageBoost technologies, and includes advanced safety features to protect against overcharging and short-circuiting.",
+    ratings: 4.7,
+    images: [
+      {
+        public_id: "shopit/demo/anker_powercore_10000_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488477/SHOPIT/images_product/med3sihjxckypdloibkx.jpg",
+      },
+      {
+        public_id: "shopit/demo/anker_powercore_10000_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488484/SHOPIT/images_product/kbn89lckqn20sin7zcwt.jpg",
+      },
+      {
+        public_id: "shopit/demo/anker_powercore_10000_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488492/SHOPIT/images_product/ucoprd8oct5ouvckoxws.jpg",
+      },
+    ],
+    category: "Accessories",
+    seller: "Anker",
+    stock: 80,
+    numOfReview: 500,
+    reviews: [],
+  },
+  {
+    name: "Garmin Forerunner 245 Music",
+    price: 299.99,
+    description:
+      "The Garmin Forerunner 245 Music is a GPS running smartwatch that lets you sync with music streaming services to easily store and play your favorite songs. It monitors your training, recovery, and overall fitness with advanced running dynamics and performance metrics.",
+    ratings: 4.4,
+    images: [
+      {
+        public_id: "shopit/demo/garmin_forerunner_245_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488604/SHOPIT/images_product/knxjbi9aabdaupxchbmv.jpg",
+      },
+      {
+        public_id: "shopit/demo/garmin_forerunner_245_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488615/SHOPIT/images_product/ifcidbn2vo23ybb7qqho.jpg",
+      },
+      {
+        public_id: "shopit/demo/garmin_forerunner_245_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488625/SHOPIT/images_product/jqp6fylb3djssnewzknf.jpg",
+      },
+      {
+        public_id: "shopit/demo/garmin_forerunner_245_4",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488634/SHOPIT/images_product/ptggq2ar0qfq67rip5ur.jpg",
+      },
+    ],
+    category: "Sports",
+    seller: "Garmin",
+    stock: 50,
+    numOfReview: 200,
+    reviews: [],
+  },
+  {
+    name: "Ring Video Doorbell 3",
+    price: 199.99,
+    description:
+      "The Ring Video Doorbell 3 offers enhanced security with 1080p HD video, improved motion detection, and dual-band Wi-Fi. It allows you to see, hear, and speak to visitors from your phone, tablet, or PC, providing peace of mind whether you're at home or away.",
+    ratings: 4.5,
+    images: [
+      {
+        public_id: "shopit/demo/ring_doorbell_3_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488684/SHOPIT/images_product/g6dnndfpovvfgpmjx0b2.jpg",
+      },
+      {
+        public_id: "shopit/demo/ring_doorbell_3_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488692/SHOPIT/images_product/edpfatlhixi6qkty0w3x.jpg",
+      },
+      {
+        public_id: "shopit/demo/ring_doorbell_3_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488702/SHOPIT/images_product/grga8saxhppwxka50aja.jpg",
+      },
+    ],
+    category: "Home",
+    seller: "Ring",
+    stock: 55,
+    numOfReview: 320,
+    reviews: [],
+  },
+  {
+    name: "JBL Flip 5 Waterproof Portable Bluetooth Speaker",
+    price: 119.95,
+    description:
+      "The JBL Flip 5 delivers bold sound and deep bass in a waterproof, durable design. It offers up to 12 hours of playtime, wireless Bluetooth streaming, and PartyBoost for connecting multiple speakers. Ideal for outdoor adventures and indoor listening alike.",
+    ratings: 4.6,
+    images: [
+      {
+        public_id: "shopit/demo/jbl_flip_5_1",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488758/SHOPIT/images_product/tresdyvywawtbbdmchyh.jpg",
+      },
+      {
+        public_id: "shopit/demo/jbl_flip_5_2",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488769/SHOPIT/images_product/uqwlfy1ogbkhqvlcv1y0.jpg",
+      },
+      {
+        public_id: "shopit/demo/jbl_flip_5_3",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488777/SHOPIT/images_product/n7emzqehcb3nv4laxyth.jpg",
+      },
+      {
+        public_id: "shopit/demo/jbl_flip_5_4",
+        url: "https://res.cloudinary.com/dtbn1pdxz/image/upload/v1717488786/SHOPIT/images_product/chd9hgkir3i76ssxklo4.jpg",
+      },
+    ],
+    category: "Electronics",
+    seller: "JBL",
+    stock: 100,
+    numOfReview: 250,
     reviews: [],
   },
 ];
