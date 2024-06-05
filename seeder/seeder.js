@@ -9,8 +9,6 @@ const seedProducts = async () => {
       "mongodb+srv://dtp2352002:TdcmY1xtZizRpXfi@cluster0.d6wxpw5.mongodb.net/phucDB"
     );
     await product.insertMany(Products);
-    console.log("Product is deleted");
-    await product.insertMany(Products);
     console.log("Product is added");
     process.exit();
   } catch (error) {

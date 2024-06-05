@@ -1,3 +1,5 @@
+import aqp from "api-query-params";
+
 class APIFilters {
   constructor(query, queryStr) {
     this.query = query;
@@ -5,6 +7,7 @@ class APIFilters {
   }
 
   search() {
+    console.log("keyword", this.queryStr.keyword);
     const keyword = this.queryStr.keyword
       ? {
           name: {
@@ -22,7 +25,7 @@ class APIFilters {
     const queryCopy = { ...this.queryStr };
 
     // Fields to remove
-    const fieldsToRemove = ["keyword", "page"];
+    const fieldsToRemove = ["keyword", "page", "pageSize", "currentPage"];
     fieldsToRemove.forEach((el) => delete queryCopy[el]);
 
     // Advance filter for price, ratings etc
@@ -33,12 +36,17 @@ class APIFilters {
     return this;
   }
 
-  pagination(resPerPage) {
-    const currentPage = Number(this.queryStr.page) || 1;
-    const skip = resPerPage * (currentPage - 1);
-
-    this.query = this.query.limit(resPerPage).skip(skip);
-    return this;
+  pagination() {
+    try {
+      console.log("check queryStr", this.queryStr);
+      console.log("current page ", this.queryStr.currentPage);
+      console.log(" page size", this.queryStr.pageSize);
+      let offSet = (this.queryStr.currentPage - 1) * this.queryStr.pageSize;
+      this.query = this.query.limit(this.queryStr.pageSize).skip(offSet);
+      return this;
+    } catch (error) {
+      console.log("error", error);
+    }
   }
 }
 

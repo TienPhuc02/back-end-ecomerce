@@ -5,7 +5,12 @@ import ErrorHandler from "../utils/errorHandler.js";
 
 //get all product -> /api/v1/products
 export const getAllProducts = catchAsyncErrors(async (req, res, next) => {
-  const apiFilters = new APIFilters(product, req.query)?.search()?.filters();
+  const apiFilters = new APIFilters(product, req.query)
+    ?.search()
+    ?.sort1()
+    ?.filters()
+    ?.pagination();
+  console.log("hehehe", apiFilters);
   console.log(
     "🚀 ~ file: productControllers.js:8 ~ getAllProducts ~ req:",
     req?.user
