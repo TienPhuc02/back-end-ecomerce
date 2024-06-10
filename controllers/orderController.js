@@ -1,6 +1,7 @@
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import Order from "../models/order.js";
-import Product from "../models/product.js";
+import product from "../models/product.js";
+import user from "../models/user.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
 //create a new order  -> api/v1/orders/new
@@ -16,6 +17,7 @@ export const createNewOrder = catchAsyncErrors(async (req, res, next) => {
     paymentMethod,
     paymentInfo,
   } = req.body;
+
   const order = await Order.create({
     orderItems,
     shippingInfo,
@@ -28,6 +30,16 @@ export const createNewOrder = catchAsyncErrors(async (req, res, next) => {
     user: req.user._id,
   });
 
+  // Cập nhật số lượng tồn kho của sản phẩm
+  for (const item of orderItems) {
+    const productFind = await product.findById(item.product);
+    if (!productFind) {
+      return next(new ErrorHandler("No product found with this ID", 404));
+    }
+    productFind.stock -= item.quantity;
+    await productFind.save({ validateBeforeSave: false });
+  }
+
   res.status(200).json({
     message: "Create Order Success!!",
     order,
@@ -36,8 +48,17 @@ export const createNewOrder = catchAsyncErrors(async (req, res, next) => {
 
 //get current user orders  -> api/v1/me/orders
 export const getMyOrders = catchAsyncErrors(async (req, res, next) => {
-  const orders = await Order.find({ user: req.user._id });
-  if (!orders) {
+  const orders = await Order.find({ user: req.user._id })
+    .populate({
+      path: "user",
+      select: "name email",
+    })
+    .populate({
+      path: "orderItems.product",
+      model: product,
+    });
+
+  if (!orders || orders.length === 0) {
     return next(new ErrorHandler("No order found with this ID", 404));
   }
   res.status(200).json({
@@ -48,10 +69,15 @@ export const getMyOrders = catchAsyncErrors(async (req, res, next) => {
 
 //get  order details  -> api/v1/orders/:id
 export const getOrderDetail = catchAsyncErrors(async (req, res, next) => {
-  const order = await Order.findById(req.params.id).populate(
-    "user",
-    "name email"
-  );
+  const order = await Order.findById(req.params.id)
+    .populate({
+      path: "user",
+      model: user,
+    })
+    .populate({
+      path: "orderItems.product",
+      model: product,
+    });
   if (!order) {
     return next(new ErrorHandler("No order found with this ID", 404));
   }

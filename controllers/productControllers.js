@@ -7,7 +7,6 @@ import ErrorHandler from "../utils/errorHandler.js";
 export const getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const apiFilters = new APIFilters(product, req.query)
     ?.search()
-    ?.sort1()
     ?.filters()
     ?.pagination();
   console.log("hehehe", apiFilters);

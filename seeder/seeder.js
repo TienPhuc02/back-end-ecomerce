@@ -8,6 +8,8 @@ const seedProducts = async () => {
     await mongoose.connect(
       "mongodb+srv://dtp2352002:TdcmY1xtZizRpXfi@cluster0.d6wxpw5.mongodb.net/phucDB"
     );
+    // Xóa tất cả các sản phẩm hiện tại để tránh trùng lặp
+    await product.deleteMany();
     await product.insertMany(Products);
     console.log("Product is added");
     process.exit();
