@@ -112,7 +112,7 @@ export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
   );
 });
 
-// forget user => api/v1/password/forgot
+
 export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
   //find user in the database
   const user = await User.findOne({ email: req.body.email });

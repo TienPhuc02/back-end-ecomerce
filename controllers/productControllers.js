@@ -1,5 +1,6 @@
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import product from "../models/product.js";
+
 import APIFilters from "../utils/apiFilter.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
@@ -75,9 +76,9 @@ export const updateProductsDetail = catchAsyncErrors(async (req, res, next) => {
 });
 // Upload product images   =>  /api/v1/admin/products/:id/upload_images
 export const uploadProductImages = catchAsyncErrors(async (req, res) => {
-  let product = await Product.findById(req?.params?.id);
+  let productFind = await product.findById(req?.params?.id);
 
-  if (!product) {
+  if (!productFind) {
     return next(new ErrorHandler("Product not found", 404));
   }
 
@@ -95,9 +96,9 @@ export const uploadProductImages = catchAsyncErrors(async (req, res) => {
 
 // Delete product image   =>  /api/v1/admin/products/:id/delete_image
 export const deleteProductImage = catchAsyncErrors(async (req, res) => {
-  let product = await Product.findById(req?.params?.id);
+  let productFind = await product.findById(req?.params?.id);
 
-  if (!product) {
+  if (!productFind) {
     return next(new ErrorHandler("Product not found", 404));
   }
 

@@ -2,7 +2,7 @@ import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import user from "../models/user.js";
 import APIFilters from "../utils/apiFilter.js";
 import ErrorHandler from "../utils/errorHandler.js";
-
+import cloudinary from "cloudinary";
 //get all user -> /api/v1/admin/users
 export const getAllUser = catchAsyncErrors(async (req, res, next) => {
   const queryStr = { ...req.query };
@@ -82,5 +82,31 @@ export const deleteUsersDetail = catchAsyncErrors(async (req, res) => {
   await user.deleteOne({ _id: req.params.id });
   res.status(200).json({
     message: "deleted User Details Success",
+  });
+});
+
+//create new product -> /api/v1/admin/users
+export const createNewUser = catchAsyncErrors(async (req, res, next) => {
+  // Upload avatar lên Cloudinary
+  const result = await cloudinary.v2.uploader.upload(req.file.path, {
+    folder: "SHOPIT/avatars",
+  });
+
+  // Tạo người dùng mới
+  const { name, email, role, password } = req.body;
+  const newUser = await user.create({
+    name,
+    email,
+    role,
+    password,
+    avatar: {
+      public_id: result.public_id,
+      url: result.secure_url,
+    },
+  });
+
+  res.status(200).json({
+    message: "Create New User with Avatar Success",
+    newUser,
   });
 });

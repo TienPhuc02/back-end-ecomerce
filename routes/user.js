@@ -1,10 +1,12 @@
 import express from "express";
 import {
+  createNewUser,
   deleteUsersDetail,
   getAllUser,
   getUserDetails,
   updateUsersDetail,
 } from "../controllers/userControllers.js";
+import upload from "../middlewares/multer.js";
 import { authorizeRoles, isAuthenticated } from "../middlewares/auth.js";
 const router = express.Router();
 router
@@ -19,4 +21,12 @@ router
 router
   .route("/admin/users/:id")
   .delete(isAuthenticated, authorizeRoles("admin"), deleteUsersDetail);
+router
+  .route("/admin/users")
+  .post(
+    isAuthenticated,
+    authorizeRoles("admin"),
+    upload.single("avatar"),
+    createNewUser
+  );
 export default router;
