@@ -85,15 +85,27 @@ export const deleteUsersDetail = catchAsyncErrors(async (req, res) => {
   });
 });
 
-//create new product -> /api/v1/admin/users
 export const createNewUser = catchAsyncErrors(async (req, res, next) => {
+  const { name, email, role, password } = req.body;
+
+  // Kiểm tra trùng tên
+  let existingUser = await user.findOne({ name });
+  if (existingUser) {
+    return next(new ErrorHandler("Tên người dùng đã tồn tại", 400));
+  }
+
+  // Kiểm tra trùng email
+  existingUser = await user.findOne({ email });
+  if (existingUser) {
+    return next(new ErrorHandler("Email đã tồn tại", 400));
+  }
+
   // Upload avatar lên Cloudinary
   const result = await cloudinary.v2.uploader.upload(req.file.path, {
     folder: "SHOPIT/avatars",
   });
 
   // Tạo người dùng mới
-  const { name, email, role, password } = req.body;
   const newUser = await user.create({
     name,
     email,
