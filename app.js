@@ -11,7 +11,7 @@ import errorMiddleware from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 const app = express();
-
+app.use(express.json());
 process.on("uncaughtException", (err) => {
   console.log(`ERROR: ${err}`);
   console.log("shutting down  server due to  uncaught expection");
@@ -21,7 +21,6 @@ dotenv.config();
 
 //connecting data base
 connectDatabase();
-
 
 app.use(
   express.json({

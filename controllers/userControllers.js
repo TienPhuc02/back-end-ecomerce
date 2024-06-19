@@ -122,3 +122,56 @@ export const createNewUser = catchAsyncErrors(async (req, res, next) => {
     newUser,
   });
 });
+
+// Bulk create users -> /api/v1/admin/users/bulk-create
+export const createBulkUsers = catchAsyncErrors(async (req, res, next) => {
+  const users = req.body;
+
+  // Check if the request body is an array
+  if (!Array.isArray(users)) {
+    return next(
+      new ErrorHandler("Request body should be an array of users", 400)
+    );
+  }
+
+  let duplicateEmails = [];
+  let duplicateNames = [];
+
+  // Check for existing emails and usernames individually
+  for (let u of users) {
+    const emailExists = await user.findOne({ email: u.email });
+    if (emailExists) {
+      duplicateEmails.push(u.email);
+    }
+
+    const nameExists = await user.findOne({ name: u.name });
+    if (nameExists) {
+      duplicateNames.push(u.name);
+    }
+  }
+
+  if (duplicateEmails.length > 0 || duplicateNames.length > 0) {
+    return next(
+      new ErrorHandler(
+        `The following emails already exist: ${duplicateEmails.join(", ")}. ` +
+          `The following usernames already exist: ${duplicateNames.join(", ")}`,
+        400
+      )
+    );
+  }
+
+  // Create new users
+  const newUsers = await user.insertMany(
+    users.map((u) => ({
+      name: u.name,
+      email: u.email,
+      role: u.role,
+      password: u.password,
+    }))
+  );
+
+  res.status(200).json({
+    message: "Bulk user creation successful",
+    newUsers,
+  });
+});

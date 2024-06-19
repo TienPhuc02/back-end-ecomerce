@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  createBulkUsers,
   createNewUser,
   deleteUsersDetail,
   getAllUser,
@@ -28,5 +29,12 @@ router
     authorizeRoles("admin"),
     upload.single("avatar"),
     createNewUser
+  );
+router
+  .route("/admin/users/bulk-create")
+  .post(
+    isAuthenticated,
+    authorizeRoles("admin"),
+    createBulkUsers
   );
 export default router;
