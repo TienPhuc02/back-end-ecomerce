@@ -18,7 +18,12 @@ router
   .get(isAuthenticated, authorizeRoles("admin"), getUserDetails);
 router
   .route("/admin/users/:id")
-  .put(isAuthenticated, authorizeRoles("admin"), updateUsersDetail);
+  .put(
+    isAuthenticated,
+    upload.single("avatar"),
+    authorizeRoles("admin"),
+    updateUsersDetail
+  );
 router
   .route("/admin/users/:id")
   .delete(isAuthenticated, authorizeRoles("admin"), deleteUsersDetail);
@@ -32,9 +37,5 @@ router
   );
 router
   .route("/admin/users/bulk-create")
-  .post(
-    isAuthenticated,
-    authorizeRoles("admin"),
-    createBulkUsers
-  );
+  .post(isAuthenticated, authorizeRoles("admin"), createBulkUsers);
 export default router;

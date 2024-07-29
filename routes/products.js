@@ -14,16 +14,22 @@ import {
   uploadProductImages,
 } from "../controllers/productControllers.js";
 import { authorizeRoles, isAuthenticated } from "../middlewares/auth.js";
+import upload from "../middlewares/multer.js";
 const router = express.Router();
 router.route("/products").get(getAllProducts);
 router
   .route("/admin/products")
-  .post(isAuthenticated, authorizeRoles("admin"), createNewProducts)
+  .post(
+    isAuthenticated,
+    authorizeRoles("admin"),
+    upload.array("images", 10),
+    createNewProducts
+  )
   .get(isAuthenticated, authorizeRoles("admin"), getAdminProducts);
 router.route("/products/:id").get(getProductsDetail);
 router
   .route("/admin/products/:id")
-  .put(isAuthenticated, authorizeRoles("admin"), updateProductsDetail);
+  .put(isAuthenticated, authorizeRoles("admin"), upload.array("images", 10), updateProductsDetail);
 router
   .route("/admin/products/:id")
   .delete(isAuthenticated, authorizeRoles("admin"), deleteProductsDetail);

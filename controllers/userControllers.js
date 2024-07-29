@@ -49,28 +49,42 @@ export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-//update product details -> /api/v1/users/:id
-export const updateUsersDetail = catchAsyncErrors(async (req, res) => {
-  const getUserDetails = await user.findById(req?.params?.id);
-  if (!getUserDetails) {
-    return next(new ErrorHandler("Product not found", 404));
-  }
-  const newUserData = {
-    email: req.body.email,
-    name: req.body.name,
-    role: req.body.role,
-  };
-  //   console.log("🚀 ~ file: userControllers.js:44 ~ updateUsersDetail ~ newUserData:", newUserData)
+// update product details -> /api/v1/users/:id
+export const updateUsersDetail = catchAsyncErrors(async (req, res, next) => {
+  try {
+    const getUserDetails = await user.findById(req.params.id);
+    if (!getUserDetails) {
+      return next(new ErrorHandler("User not found", 404));
+    }
 
-  const newUserUpdate = await user.findByIdAndUpdate(
-    req?.params?.id,
-    newUserData,
-    { new: true }
-  );
-  res.status(200).json({
-    message: "Get Users Details Success",
-    newUserUpdate,
-  });
+    // Upload avatar to Cloudinary
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "SHOPIT/avatars",
+    });
+
+    const newUserData = {
+      email: req.body.email,
+      name: req.body.name,
+      role: req.body.role,
+      avatar: {
+        public_id: result.public_id,
+        url: result.secure_url,
+      },
+    };
+
+    const newUserUpdate = await user.findByIdAndUpdate(
+      req.params.id,
+      newUserData,
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "User details updated successfully",
+      newUserUpdate,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
 });
 
 //delete user details -> /api/v1/users/:id
@@ -126,8 +140,6 @@ export const createNewUser = catchAsyncErrors(async (req, res, next) => {
 // Bulk create users -> /api/v1/admin/users/bulk-create
 export const createBulkUsers = catchAsyncErrors(async (req, res, next) => {
   const users = req.body;
-
-  // Check if the request body is an array
   if (!Array.isArray(users)) {
     return next(
       new ErrorHandler("Request body should be an array of users", 400)

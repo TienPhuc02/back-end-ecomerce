@@ -89,7 +89,15 @@ export const getOrderDetail = catchAsyncErrors(async (req, res, next) => {
 
 //get  all order -ADMIN   -> api/v1/admin/orders
 export const getAllOrders = catchAsyncErrors(async (req, res, next) => {
-  const order = await Order.find();
+  const order = await Order.find()
+    .populate({
+      path: "user",
+      model: user,
+    })
+    .populate({
+      path: "orderItems.product",
+      model: product,
+    });
   if (!order) {
     return next(new ErrorHandler("No order found with this ID", 404));
   }
@@ -110,14 +118,14 @@ export const updateOrder = catchAsyncErrors(async (req, res, next) => {
     );
   }
   order?.orderItems?.forEach(async (item) => {
-    const product = await Product.findById(item?.product?.toString());
-    if (!product) {
+    const productUpdate = await product.findById(item?.product?.toString());
+    if (!productUpdate) {
       return next(new ErrorHandler("No product found with this ID", 404));
     }
-    product.stock = product.stock - item.quantity;
-    await product.save({ validateBeforeSave: false });
+    productUpdate.stock = productUpdate.stock - item.quantity;
+    await productUpdate.save({ validateBeforeSave: false });
   });
-  order.orderStatus = req.body.status;
+  order.orderStatus = req.body.orderStatus;
   order.deliverAt = Date.now();
   await order.save();
   res.status(200).json({
